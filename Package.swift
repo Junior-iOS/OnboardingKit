@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "OnboardingKit",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v15)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -20,7 +20,7 @@ let package = Package(
     targets: [
         .target(
             name: "OnboardingKit",
-            dependencies: ["SnapKit"]),
+            dependencies: [.product(name: "SnapKit", package: "SnapKit")]),
         .testTarget(
             name: "OnboardingKitTests",
             dependencies: ["OnboardingKit"]),
