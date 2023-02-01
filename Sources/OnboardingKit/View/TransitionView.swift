@@ -12,7 +12,7 @@ class TransitionView: UIView {
     private lazy var progressBars: [ProgressBarView] = {
         var views: [ProgressBarView] = []
         slides.forEach { _ in
-            views.append(ProgressBarView())
+            views.append(ProgressBarView(barColor: viewTintColor))
         }
         return views
     }()
@@ -21,7 +21,6 @@ class TransitionView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemOrange
         return imageView
     }()
     
@@ -109,14 +108,18 @@ class TransitionView: UIView {
     private func showNext() {
         let nextImage: UIImage
         let nextTitle: String
+        let nextBarView: ProgressBarView
         
         if slides.indices.contains(index + 1) {
             nextImage = slides[index + 1].image
             nextTitle = slides[index + 1].title
+            nextBarView = progressBars[index + 1]
             index += 1
         } else {
+            progressBars.forEach({ $0.reset() })
             nextImage = slides[0].image
             nextTitle = slides[0].title
+            nextBarView = progressBars[0]
             index = 0
         }
         
@@ -125,5 +128,24 @@ class TransitionView: UIView {
         })
         
         titleView.setTitleLabel(text: nextTitle)
+        nextBarView.startAnimating()
+    }
+    
+    public func handleTap(direction: Direction) {
+        switch direction {
+        case .left:
+            progressBars[index].reset()
+            
+            if progressBars.indices.contains(index - 1) {
+                progressBars[index - 1].reset()
+            }
+            index -= 2
+        case .right:
+            progressBars[index].complete()
+        }
+        
+        timer?.cancel()
+        timer = nil
+        start()
     }
 }

@@ -16,7 +16,7 @@ class TitleView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 0
-        label.backgroundColor = .green
+        label.textAlignment = .center
         return label
     }()
 
