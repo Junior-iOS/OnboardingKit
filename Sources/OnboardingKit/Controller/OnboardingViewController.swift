@@ -12,6 +12,9 @@ class OnboardingViewController: UIViewController {
     private let slides: [Slide]
     private let tintColor: UIColor
     
+    public var nextButtonTapped: ((Int) -> Void)?
+    public var getStartedButtonTapped: (() -> Void)?
+    
     private lazy var transitionView: TransitionView = {
         let view = TransitionView(slides: slides, tintColor: tintColor)
         return view
@@ -19,12 +22,12 @@ class OnboardingViewController: UIViewController {
     
     private lazy var buttonView: ButtonContainerView = {
         let button = ButtonContainerView(tintColor: tintColor)
-        button.didTapNextbutton = {
-            print("didTapNextbutton")
+        button.didTapNextbutton = { [weak self] in
+            guard let self = self else { return }
+            self.nextButtonTapped?(self.transitionView.slideIndex)
+            self.transitionView.handleTap(direction: .right)
         }
-        button.didTapGetStartedButton = {
-            print("didTapGetStartedButton")
-        }
+        button.didTapGetStartedButton = getStartedButtonTapped
         return button
     }()
     

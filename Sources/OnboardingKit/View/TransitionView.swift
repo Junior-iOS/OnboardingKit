@@ -52,6 +52,10 @@ class TransitionView: UIView {
     
     private var timer: DispatchSourceTimer?
     private var index: Int = -1
+    
+    public var slideIndex: Int {
+        return index
+    }
 
     init(slides: [Slide], tintColor: UIColor) {
         self.slides = slides
