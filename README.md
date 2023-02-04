@@ -53,6 +53,52 @@ If you prefer not to use Swift Package Manager, you can integrate OnboardingKit 
 ### Quick Start
 
 ```swift
+# OnboardingKit
+
+    OnboardingKit provides an onboarding flow that is simple and easy to implement.
+
+## Contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+
+## Requirements
+
+- iOS 15.0 or later
+- Xcode 13.0 or later
+- Swift 5.0 or later
+
+
+## Installation
+There are two ways to use OnboardingKit in your project:
+- using Swift Package Manager
+- manual install (build frameworks or embed Xcode Project)
+
+### Swift Package Manager
+
+To integrate OnboardingKit into your Xcode project using Swift Package Manager, add it to the dependencies value of your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Junior-iOS/OnboardingKit.git", .upToNextMajor(from: "1.0.0"))
+]
+```
+
+[Swift Package Manager](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+### Manually
+
+If you prefer not to use Swift Package Manager, you can integrate OnboardingKit into your project manually.
+
+---
+
+## Usage
+
+### Quick Start
+
+```swift
 import UIKit
 import OnboardingKit
 
@@ -103,6 +149,26 @@ class ViewController: UIViewController {
         UIView.transition(with: uiWindow, duration: 0.3, options: [.transitionCrossDissolve], animations: nil)
     }
 }
+
+extension ViewController: OnboardingKitDelegate {
+    func didTapNextButton(at index: Int) {
+        print("Next button tapped at index: \(index)")
+    }
+    
+    func didTapGetStarted() {
+        onboardingKit?.dismissOnboarding()
+        onboardingKit = nil
+        
+        createWindowScene(with: AnotherViewController())
+    }
+}
+```
+
+## Credits
+
+- NJ Development® by Junior Silva
+
+
 ```
 
 ## Credits
