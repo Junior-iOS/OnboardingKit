@@ -14,9 +14,10 @@ class OnboardingViewController: UIViewController {
     
     public var nextButtonTapped: ((Int) -> Void)?
     public var getStartedButtonTapped: (() -> Void)?
+    private var themeFont: UIFont
     
     private lazy var transitionView: TransitionView = {
-        let view = TransitionView(slides: slides, tintColor: tintColor)
+        let view = TransitionView(slides: slides, tintColor: tintColor, font: themeFont)
         return view
     }()
     
@@ -37,9 +38,10 @@ class OnboardingViewController: UIViewController {
         return stack
     }()
     
-    public init(slides: [Slide], tintColor: UIColor = .systemCyan) {
+    public init(slides: [Slide], tintColor: UIColor = .systemCyan, font: UIFont) {
         self.slides = slides
         self.tintColor = tintColor
+        self.themeFont = font
         super.init(nibName: nil, bundle: nil)
     }
     

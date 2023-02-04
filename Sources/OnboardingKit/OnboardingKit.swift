@@ -9,12 +9,13 @@ public class OnboardingKit {
     
     private let slides: [Slide]
     private let tintColor: UIColor
+    private let themeFont: UIFont
     
     public weak var delegate: OnboardingKitDelegate?
     private var rootVC: UIViewController?
     
     private lazy var onboardingViewController: OnboardingViewController = {
-        let viewController = OnboardingViewController(slides: slides, tintColor: tintColor)
+        let viewController = OnboardingViewController(slides: slides, tintColor: tintColor, font: themeFont)
         viewController.modalTransitionStyle = .crossDissolve
         viewController.modalPresentationStyle = .fullScreen
         viewController.nextButtonTapped = { [weak self] index in
@@ -26,9 +27,12 @@ public class OnboardingKit {
         return viewController
     }()
     
-    public init(slides: [Slide], tintColor: UIColor = .systemCyan) {
+    public init(slides: [Slide],
+                tintColor: UIColor = .systemCyan,
+                font: UIFont = UIFont(name: "ArialRoundedMTBold", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)) {
         self.slides = slides
         self.tintColor = tintColor
+        self.themeFont = font
     }
     
     public func launchOnboarding(controller: UIViewController) {

@@ -25,7 +25,7 @@ class TransitionView: UIView {
     }()
     
     private lazy var titleView: TitleView = {
-        let view = TitleView()
+        let view = TitleView(font: themeFont)
         return view
     }()
     
@@ -52,14 +52,16 @@ class TransitionView: UIView {
     
     private var timer: DispatchSourceTimer?
     private var index: Int = -1
+    private var themeFont: UIFont
     
     public var slideIndex: Int {
         return index
     }
 
-    init(slides: [Slide], tintColor: UIColor) {
+    init(slides: [Slide], tintColor: UIColor, font: UIFont) {
         self.slides = slides
         self.viewTintColor = tintColor
+        self.themeFont = font
         super.init(frame: .zero)
         setupLayout()
     }

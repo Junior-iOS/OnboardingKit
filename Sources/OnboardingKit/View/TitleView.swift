@@ -9,9 +9,9 @@ import UIKit
 
 class TitleView: UIView {
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "ArialRoundedMTBold", size: 28)
+        label.font = themeFont
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -19,9 +19,12 @@ class TitleView: UIView {
         label.textAlignment = .center
         return label
     }()
+    
+    private let themeFont: UIFont
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(font: UIFont) {
+        self.themeFont = font
+        super.init(frame: .zero)
         layoutView()
     }
     
