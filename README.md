@@ -10,6 +10,10 @@
 # OnboardingKit
 
     OnboardingKit provides an onboarding flow that is simple and easy to implement.
+    
+<p align="left">
+    <img src="https://media.giphy.com/media/yjivddWdI5o4fh4sx1/giphy.gif" width="300" max-width="40%" alt="Context Menu" />
+</p>
 
 ## Contents
 
