@@ -1,3 +1,12 @@
+<p align="center">
+    <img src="https://img.shields.io/badge/Swift-5.7-orange.svg" />
+    <img src="https://img.shields.io/badge/Xcode-14.2.X-orange.svg" />
+    <img src="https://img.shields.io/badge/platforms-iOS-brightgreen.svg?style=flat" alt="iOS" />
+    <a href="https://www.linkedin.com/in/nelson-junior-70b113100/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-@NelsonJunior-blue.svg?style=flat" alt="LinkedIn: @NelsonJunior" />
+    </a>
+</p>
+
 # OnboardingKit
 
     OnboardingKit provides an onboarding flow that is simple and easy to implement.
