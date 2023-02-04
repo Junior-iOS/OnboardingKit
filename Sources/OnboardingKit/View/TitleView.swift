@@ -46,5 +46,4 @@ class TitleView: UIView {
             make.trailing.equalTo(snp.trailing).offset(-36)
         }
     }
-    
 }
