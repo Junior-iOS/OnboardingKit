@@ -168,10 +168,3 @@ extension ViewController: OnboardingKitDelegate {
 
 - NJ Development® by Junior Silva
 
-
-```
-
-## Credits
-
-- NJ Development® by Junior Silva
-
