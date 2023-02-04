@@ -80,10 +80,12 @@ class OnboardingViewController: UIViewController {
         let point = tap.location(in: view)
         let screenMiddlePoint = view.frame.size.width / 2
         
-        if point.x > screenMiddlePoint {
-            transitionView.handleTap(direction: .right)
-        } else {
-            transitionView.handleTap(direction: .left)
-        }
+        point.x < screenMiddlePoint
+        ? transitionView.handleTap(direction: .left)
+        : transitionView.handleTap(direction: .right)
+    }
+    
+    public func stopAnimation() {
+        transitionView.stop()
     }
 }

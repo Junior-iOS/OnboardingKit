@@ -11,6 +11,7 @@ public class OnboardingKit {
     private let tintColor: UIColor
     
     public weak var delegate: OnboardingKitDelegate?
+    private var rootVC: UIViewController?
     
     private lazy var onboardingViewController: OnboardingViewController = {
         let viewController = OnboardingViewController(slides: slides, tintColor: tintColor)
@@ -31,11 +32,14 @@ public class OnboardingKit {
     }
     
     public func launchOnboarding(controller: UIViewController) {
-        controller.present(onboardingViewController, animated: true)
+        rootVC = controller
+        rootVC?.present(onboardingViewController, animated: true)
     }
     
     public func dismissOnboarding() {
-        
+        onboardingViewController.stopAnimation()
+        if rootVC?.presentedViewController == onboardingViewController {
+            onboardingViewController.dismiss(animated: true)
+        }
     }
-    
 }
