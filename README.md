@@ -126,7 +126,8 @@ class ViewController: UIViewController {
                     Slide(image: UIImage(named: "macMini")!, title: "Mac mini with M2 packs the speed you need to get more done faster."),
                     Slide(image: UIImage(named: "macBook")!, title: "Supercharged by M2 Pro or M2 Max, MacBook Pro takes its power and efficiency further than ever."),
                 ],
-                tintColor: UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1)
+                tintColor: UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1),
+                font: UIFont(name: "Kohinoor Bangla", size: 28) ?? .systemFont(ofSize: 28, weight: .bold)
             )
             
             self.onboardingKit?.delegate = self
@@ -163,7 +164,7 @@ extension ViewController: OnboardingKitDelegate {
         onboardingKit?.dismissOnboarding()
         onboardingKit = nil
         
-        createWindowScene(with: AnotherViewController())
+        createWindowScene(with: MainViewController())
     }
 }
 ```
