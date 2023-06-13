@@ -14,7 +14,7 @@ class ButtonContainerView: UIView {
     
     private lazy var nextButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Next", for: .normal)
+        button.setTitle("Próximo", for: .normal)
         button.setTitleColor(viewTintColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 16)
         button.layer.borderColor = viewTintColor.cgColor
@@ -26,7 +26,7 @@ class ButtonContainerView: UIView {
     
     private lazy var getStartedButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Get Started", for: .normal)
+        button.setTitle("Apostar", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "ArialRoundedMTBold", size: 16)
         button.backgroundColor = viewTintColor
@@ -73,7 +73,7 @@ class ButtonContainerView: UIView {
         }
     }
     
-    @objc private func nextButtonTapped() {
+    @objc private func nextButtonTapped(buttonTitle: String) {
         didTapNextbutton?()
     }
     
