@@ -73,7 +73,7 @@ class ButtonContainerView: UIView {
         }
     }
     
-    @objc private func nextButtonTapped(buttonTitle: String) {
+    @objc private func nextButtonTapped() {
         didTapNextbutton?()
     }
     
