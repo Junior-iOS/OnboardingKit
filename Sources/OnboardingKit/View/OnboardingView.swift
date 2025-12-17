@@ -9,13 +9,21 @@ import Foundation
 import UIKit
 
 public final class OnboardingView: UIView {
-    private var steps: [String] = []
+    private var steps: [(image: UIImage?, text: String)] = []
     private var currentStep = 0
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Colors.gray100.withAlphaComponent(0.4)
+        view.backgroundColor = Colors.gray100.withAlphaComponent(0.6)
+        return view
+    }()
+    
+    private lazy var imageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFit
+        view.alpha = 0
         return view
     }()
     
@@ -25,7 +33,8 @@ public final class OnboardingView: UIView {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = Typography.heading
-        label.textColor = Colors.gray300
+        label.textColor = Colors.gray700
+        label.alpha = 0
         return label
     }()
     
@@ -49,7 +58,7 @@ public final class OnboardingView: UIView {
     
     private func setupUI() {
         backgroundColor = .clear
-        addSubviews(backgroundView, messageLabel, nextButton)
+        addSubviews(backgroundView, imageView, messageLabel, nextButton)
         setupConstraints()
     }
     
@@ -60,8 +69,13 @@ public final class OnboardingView: UIView {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 50),
+            imageView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            messageLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Metrics.medium),
             messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            messageLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
             
@@ -72,7 +86,7 @@ public final class OnboardingView: UIView {
         ])
     }
     
-    public func presentOnboarding(on view: UIView, with steps: [String]) {
+    public func presentOnboarding(on view: UIView, with steps: [(image: UIImage?, text: String)]) {
         self.steps = steps
         self.currentStep = 0
         updateSteps()
@@ -86,10 +100,31 @@ public final class OnboardingView: UIView {
             trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        updateSteps()
     }
     
-    private func updateSteps() {
-        messageLabel.text = steps.isEmpty ? nil : steps[currentStep]
+    private func updateSteps(animated: Bool = true) {
+        let step = steps[currentStep]
+        imageView.image = step.image
+        messageLabel.text = step.text
+        
+        if animated {
+            animateTextEntry()
+        } else {
+            messageLabel.alpha = 1
+            messageLabel.transform = .identity
+        }
+    }
+    
+    private func animateTextEntry() {
+        messageLabel.alpha = 0
+        messageLabel.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.messageLabel.alpha = 1
+            self.messageLabel.transform = .identity
+        }
     }
     
     @objc private func didTapNextStep() {
