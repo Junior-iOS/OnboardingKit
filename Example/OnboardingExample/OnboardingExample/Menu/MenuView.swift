@@ -11,6 +11,7 @@ import OnboardingKit
 
 protocol MenuViewProtocol: AnyObject {
     func didTapOnboarding()
+    func didTapOnCheckbox()
 }
 
 final class MenuView: UIView {
@@ -35,6 +36,17 @@ final class MenuView: UIView {
         return button
     }()
     
+    private lazy var checkboxButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Checkbox", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = Metrics.medium
+        button.addTarget(self, action: #selector(didTapOnCheckbox), for: .touchUpInside)
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -45,7 +57,7 @@ final class MenuView: UIView {
     
     private func setupView() {
         backgroundColor = .systemBackground
-        addSubviews(titleLabel, onboardingButton)
+        addSubviews(titleLabel, onboardingButton, checkboxButton)
         setupConstraints()
     }
     
@@ -60,11 +72,20 @@ final class MenuView: UIView {
             onboardingButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             onboardingButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             onboardingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
-            onboardingButton.heightAnchor.constraint(equalToConstant: 50)
+            onboardingButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            checkboxButton.topAnchor.constraint(equalTo: onboardingButton.bottomAnchor, constant: Metrics.medium),
+            checkboxButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
+            checkboxButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            checkboxButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
     @objc private func didTapOnboarding() {
         delegate?.didTapOnboarding()
+    }
+    
+    @objc private func didTapOnCheckbox() {
+        delegate?.didTapOnCheckbox()
     }
 }

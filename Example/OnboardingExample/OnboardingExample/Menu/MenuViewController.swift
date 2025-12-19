@@ -22,6 +22,10 @@ final class MenuViewController: UIViewController {
 }
 
 extension MenuViewController: MenuViewProtocol {
+    func didTapOnCheckbox() {
+        navigationController?.present(CheckboxViewController(), animated: true)
+    }
+    
     func didTapOnboarding() {
         let onboardingView = OnboardingView()
         let steps: [(image: UIImage?, text: String)] = [
