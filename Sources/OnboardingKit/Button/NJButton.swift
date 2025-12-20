@@ -13,7 +13,7 @@ public protocol NJButtonProtocol: AnyObject {
 }
 
 public final class NJButton: UIButton {
-    weak var delegate: NJButtonProtocol?
+    public weak var delegate: NJButtonProtocol?
     private var iconPosition: NSLayoutConstraint.Axis?
     private var customWidth: CGFloat?
     

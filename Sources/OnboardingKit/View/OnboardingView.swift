@@ -23,6 +23,7 @@ public final class OnboardingView: UIView {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
+        view.tintColor = Colors.gray700
         view.alpha = 0
         return view
     }()
@@ -71,8 +72,8 @@ public final class OnboardingView: UIView {
             
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 50),
-            imageView.widthAnchor.constraint(equalToConstant: 200),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
+            imageView.widthAnchor.constraint(equalToConstant: 50),
+            imageView.heightAnchor.constraint(equalToConstant: 50),
             
             messageLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Metrics.medium),
             messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -114,16 +115,22 @@ public final class OnboardingView: UIView {
         } else {
             messageLabel.alpha = 1
             messageLabel.transform = .identity
+            imageView.alpha = 1
+            imageView.transform = .identity
         }
     }
     
     private func animateTextEntry() {
         messageLabel.alpha = 0
         messageLabel.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
-        
+        imageView.alpha = 0
+        imageView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width, y: 0)
+
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
             self.messageLabel.alpha = 1
             self.messageLabel.transform = .identity
+            self.imageView.alpha = 1
+            self.imageView.transform = .identity
         }
     }
     

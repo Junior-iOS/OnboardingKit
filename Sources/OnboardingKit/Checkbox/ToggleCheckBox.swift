@@ -28,7 +28,7 @@ public final class ToggleCheckBox: UIButton {
         setImage(isChecked ? checkedImage : uncheckedImage, for: .normal)
     }
 
-    public func getIsCheckedState() -> Bool {
+    public func hasCheckedState() -> Bool {
         isChecked
     }
 }
